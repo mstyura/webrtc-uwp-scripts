@@ -450,17 +450,11 @@ POPD
 GOTO:EOF
 
 :determineWindowsSDK
-SET windowsSDKPath="Program Files (x86)\Windows Kits\10\Lib\"
-SET windowsSDKFullPath=C:\!windowsSDKPath!
+SET windowsSDKFullPath="%ProgramFiles(x86)%\Windows Kits\10\Lib\"
 
 IF DEFINED USE_WIN_SDK_FULL_PATH SET windowsSDKFullPath=!USE_WIN_SDK_FULL_PATH! && GOTO parseSDKPath
 IF DEFINED USE_WIN_SDK SET windowsSDKVersion=!USE_WIN_SDK! && GOTO setVersion
-FOR %%p IN (A B C D E F G H I J K L M N O P Q R S T U V W X Y Z) DO (
-	IF EXIST %%p:\!windowsSDKPath! (
-		SET windowsSDKFullPath=%%p:\!windowsSDKPath!
-		GOTO determineVersion
-	)
-)
+
 
 :parseSDKPath
 IF EXIST !windowsSDKFullPath! (
